@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import static it.ennova.photo.lib.PhotoLib.*;
-
 class PictureDecodeUtils {
 
     static void parsePictureFrom(@NonNull Intent data, @NonNull OnPhotoRetrievedListener listener, @NonNull String path) {
