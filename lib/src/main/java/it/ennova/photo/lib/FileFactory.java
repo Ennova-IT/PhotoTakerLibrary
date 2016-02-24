@@ -1,5 +1,7 @@
 package it.ennova.photo.lib;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 
@@ -16,5 +18,16 @@ class FileFactory {
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), customDirectoryName);
         storageDir.mkdirs();
         return File.createTempFile(imageFileName, ".jpg", storageDir);
+    }
+
+    static Bitmap decodeCorrectlyOrientedImageFrom(@NonNull String path) {
+        Bitmap source = BitmapFactory.decodeFile(path);
+
+        try {
+            source = BitmapUtils.transform(path, source);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return source;
     }
 }

@@ -82,6 +82,6 @@ public class PhotoLib {
     }
 
     private static void decodePictureFrom(@NonNull String path, @NonNull OnPhotoRetrievedListener listener) {
-        listener.onPhotoRetrieved(BitmapFactory.decodeFile(path));
+        listener.onPhotoRetrieved(FileFactory.decodeCorrectlyOrientedImageFrom(path));
     }
 }
