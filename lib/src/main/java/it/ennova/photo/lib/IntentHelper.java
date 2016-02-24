@@ -8,12 +8,10 @@ import android.support.annotation.Nullable;
 
 import java.io.File;
 
-import static it.ennova.photo.lib.PhotoLib.*;
-
 class IntentHelper {
 
     static void checkFullSizePhotoRequest(@NonNull Intent pictureIntent,
-                                          @Nullable OnPhotoPathCreatedListener listener,
+                                          @Nullable PhotoLib listener,
                                           @NonNull String customDirectoryName) {
 
         if (listener != null) {
@@ -22,7 +20,7 @@ class IntentHelper {
     }
 
     private static void patchIntentForFullSizePhoto(@NonNull Intent pictureIntent,
-                                                    @NonNull OnPhotoPathCreatedListener listener,
+                                                    @NonNull PhotoLib listener,
                                                     @NonNull String customDirectoryName) {
 
         try {

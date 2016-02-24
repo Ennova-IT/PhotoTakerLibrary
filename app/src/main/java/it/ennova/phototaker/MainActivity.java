@@ -9,14 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import it.ennova.photo.lib.OnPhotoRetrievedListener;
 import it.ennova.photo.lib.PhotoLib;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,
-        PhotoLib.OnPhotoRetrievedListener, PhotoLib.OnPhotoPathCreatedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnPhotoRetrievedListener {
 
     private ImageView photoView;
-    private String imagePath;
+    private PhotoLib photoLib;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,31 +24,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         findViewById(R.id.takePhotoButton).setOnClickListener(this);
         photoView = (ImageView) findViewById(R.id.photo);
+        photoLib = new PhotoLib(this, "Your App Name Here", this);
     }
 
     @Override
     public void onClick(View v) {
-        PhotoLib.takePictureFromCameraWith(this, this, "Your App Name Here");
-    }
-
-    @Override
-    public void onPhotoPathCreated(@NonNull String path) {
-        imagePath = path;
-    }
-
-    @Override
-    public void onPhotoPathError() {
-        imagePath = "";
+        photoLib.takePictureFromCamera();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        PhotoLib.onActivityResult(requestCode, resultCode, data, this, imagePath);
+        photoLib.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onPhotoRetrieved(@Nullable Bitmap picture) {
         photoView.setImageBitmap(picture);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        photoLib.onRequestPermissionResult(requestCode, permissions, grantResults);
     }
 }

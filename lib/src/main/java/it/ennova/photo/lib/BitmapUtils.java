@@ -19,24 +19,22 @@ class BitmapUtils {
             case ExifInterface.ORIENTATION_ROTATE_180:
             case ExifInterface.ORIENTATION_ROTATE_270:
                 matrix = MatrixFactory.buildRotationMatrixFrom(orientation);
-                break;
+                return applyTransformationMatrix(bitmap, matrix);
             case ExifInterface.ORIENTATION_FLIP_VERTICAL:
                 matrix = MatrixFactory.buildVerticalFlipMatrixFrom(bitmap);
-                break;
+                return applyTransformationMatrix(bitmap, matrix);
             case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
                 matrix = MatrixFactory.buildHorizontalFlipMatrixFrom(bitmap);
-                break;
+                return applyTransformationMatrix(bitmap, matrix);
             case ExifInterface.ORIENTATION_TRANSPOSE:
             case ExifInterface.ORIENTATION_TRANSVERSE:
                 matrix = MatrixFactory.buildDiagonalFlipMatrixFrom(bitmap);
-                break;
+                return applyTransformationMatrix(bitmap, matrix);
             case ExifInterface.ORIENTATION_NORMAL:
             case ExifInterface.ORIENTATION_UNDEFINED:
             default:
-                matrix = new Matrix();
+                return bitmap;
         }
-
-        return applyTransformationMatrix(bitmap, matrix);
     }
 
     private static Bitmap applyTransformationMatrix(Bitmap bitmap, Matrix transformationMatrix) {
