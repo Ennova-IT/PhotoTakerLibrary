@@ -55,7 +55,7 @@ public class PhotoLib {
     }
 
     void onPermissionRationaleRequested() {
-
+        listener.onPermissionRationaleRequested();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
