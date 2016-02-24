@@ -67,4 +67,8 @@ public class PhotoLib {
     public void onRequestPermissionResult(int requestCode, String permissions[], int[] grantResults) {
         PermissionManager.onRequestPermissionResult(requestCode, grantResults, this);
     }
+
+    public String getPhotoPath() {
+        return path;
+    }
 }

@@ -24,7 +24,7 @@ Add the dependency:
 ```
 
 dependencies {
-  compile 'com.github.Ennova-IT:PhotoTakerLibrary:V1.0'
+  compile 'com.github.Ennova-IT:PhotoTakerLibrary:V1.1'
 }
 
 ```
@@ -52,6 +52,9 @@ and manage the retrieved picture in the `void onPhotoRetrieved(Bitmap)` method o
 your `OnPhotoRetrievedListener`. If the library needs to request a rationale for
 the new Android Runtime permission request, the `void onPermissionRationaleRequested()`
 method will be invoked.
+
+You can always retrieve the path of the image by using the `PhotoLib.getPhotoPath()`
+method.
 
 __________________
 
