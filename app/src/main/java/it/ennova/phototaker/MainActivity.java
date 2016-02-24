@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        PhotoLib.takePictureFromCameraWith(this, this);
+        PhotoLib.takePictureFromCameraWith(this, this, "Your App Name Here");
     }
 
     @Override

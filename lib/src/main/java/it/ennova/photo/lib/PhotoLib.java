@@ -25,25 +25,32 @@ public class PhotoLib {
         void onPhotoPathError();
     }
 
-    public static void takePictureFromCameraWith(@NonNull Activity activity, @Nullable OnPhotoPathCreatedListener listener) {
+    public static void takePictureFromCameraWith(@NonNull Activity activity,
+                                                 @Nullable OnPhotoPathCreatedListener listener,
+                                                 @NonNull String customDirectoryName) {
+
         Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (pictureIntent.resolveActivity(activity.getPackageManager()) != null) {
-            checkFullSizeRequest(pictureIntent, listener);
+            checkFullSizeRequest(pictureIntent, listener, customDirectoryName);
             activity.startActivityForResult(pictureIntent, PHOTO_REQUEST_CODE);
         }
     }
 
-    private static void checkFullSizeRequest(@NonNull Intent pictureIntent, @Nullable OnPhotoPathCreatedListener listener) {
+    private static void checkFullSizeRequest(@NonNull Intent pictureIntent,
+                                             @Nullable OnPhotoPathCreatedListener listener,
+                                             @NonNull String customDirectoryName) {
 
         if (listener != null) {
-            patchIntentForFullSizePhoto(pictureIntent, listener);
+            patchIntentForFullSizePhoto(pictureIntent, listener, customDirectoryName);
         }
     }
 
-    private static void patchIntentForFullSizePhoto(@NonNull Intent pictureIntent, @NonNull OnPhotoPathCreatedListener listener) {
+    private static void patchIntentForFullSizePhoto(@NonNull Intent pictureIntent,
+                                                    @NonNull OnPhotoPathCreatedListener listener,
+                                                    @NonNull String customDirectoryName) {
 
         try {
-            File bitmapFile = FileFactory.createImageFileWith();
+            File bitmapFile = FileFactory.createImageFileWith(customDirectoryName);
             listener.onPhotoPathCreated(bitmapFile.getAbsolutePath());
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(bitmapFile));
         } catch (Exception e) {
