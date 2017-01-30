@@ -11,17 +11,18 @@ public class PhotoLib {
     @NonNull
     private AppCompatActivity targetActivity;
     @NonNull
-    private String customDirectoryName;
-    @NonNull
     private String path;
+    @NonNull
+    private String applicationId;
     @NonNull
     private OnPhotoRetrievedListener listener;
 
-    public PhotoLib(@NonNull AppCompatActivity targetActivity, @NonNull String customDirectoryName,
+    public PhotoLib(@NonNull AppCompatActivity targetActivity,
+                    @NonNull String applicationId,
                     @NonNull OnPhotoRetrievedListener listener) {
 
         this.targetActivity = targetActivity;
-        this.customDirectoryName = customDirectoryName;
+        this.applicationId = applicationId;
         this.listener = listener;
     }
 
@@ -45,7 +46,7 @@ public class PhotoLib {
     private void takePicture() {
         Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (pictureIntent.resolveActivity(targetActivity.getPackageManager()) != null) {
-            IntentHelper.checkFullSizePhotoRequest(pictureIntent, this, customDirectoryName);
+            IntentHelper.checkFullSizePhotoRequest(targetActivity, pictureIntent, this, applicationId);
             targetActivity.startActivityForResult(pictureIntent, PHOTO_REQUEST_CODE);
         }
     }

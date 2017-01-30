@@ -40,8 +40,7 @@ photoLib = new PhotoLib(AppCompatActivity, String, OnPhotoRetrievedListener);
 
 ```
 
-where the `String` is the name of the directory in which your data will be saved
-in the hard drive.
+where the `String` is the applicationId of your app
 
 Request a picture:
 ```
