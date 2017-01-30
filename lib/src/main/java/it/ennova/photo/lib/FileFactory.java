@@ -21,7 +21,7 @@ class FileFactory {
     }
 
     static Bitmap decodeCorrectlyOrientedImageFrom(@NonNull String path) {
-        Bitmap source = BitmapFactory.decodeFile(path);
+        Bitmap source = BitmapFactory.decodeFile(path, provideCompressionBitmapFactoryOptions());
 
         try {
             source = BitmapUtils.transform(path, source);
@@ -29,5 +29,12 @@ class FileFactory {
             e.printStackTrace();
         }
         return source;
+    }
+
+    private static BitmapFactory.Options provideCompressionBitmapFactoryOptions(){
+        BitmapFactory.Options opt = new BitmapFactory.Options();
+        opt.inJustDecodeBounds = false;
+        opt.inPreferredConfig = Bitmap.Config.RGB_565;
+        return opt;
     }
 }
