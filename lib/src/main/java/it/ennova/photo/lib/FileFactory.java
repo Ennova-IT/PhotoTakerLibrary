@@ -12,11 +12,11 @@ import java.util.Date;
 
 class FileFactory {
 
-    static File createImageFileWith(@NonNull String customDirectoryName) throws IOException {
-        final String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        final String imageFileName = "JPEG_" + timestamp;
-        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), customDirectoryName);
-        storageDir.mkdirs();
+    static File createImageFileWith() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
         return File.createTempFile(imageFileName, ".jpg", storageDir);
     }
 
