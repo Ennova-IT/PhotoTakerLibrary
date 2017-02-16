@@ -1,8 +1,10 @@
 package it.ennova.photo.lib;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,6 +39,10 @@ class IntentHelper {
                     bitmapFile);
 
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+                pictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                pictureIntent.setClipData(ClipData.newRawUri("", photoURI));
+            }
         } catch (Exception e) {
             listener.onPhotoPathError();
         }
