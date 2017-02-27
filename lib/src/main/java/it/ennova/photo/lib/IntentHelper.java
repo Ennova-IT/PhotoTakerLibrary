@@ -40,8 +40,8 @@ class IntentHelper {
 
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
-                pictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 pictureIntent.setClipData(ClipData.newRawUri("", photoURI));
+                pictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             }
         } catch (Exception e) {
             listener.onPhotoPathError();
