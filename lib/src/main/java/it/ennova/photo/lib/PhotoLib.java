@@ -62,6 +62,7 @@ public class PhotoLib {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PHOTO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             PictureDecodeUtils.parsePictureFrom(data, listener, path);
+            targetActivity.finish();
         }
     }
 

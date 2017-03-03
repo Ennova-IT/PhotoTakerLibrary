@@ -1,5 +1,6 @@
 package it.ennova.photo.lib;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -14,6 +15,7 @@ class FileFactory {
 
     static File createImageFileWith() throws IOException {
         // Create an image file name
+        @SuppressLint("SimpleDateFormat")
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
@@ -31,7 +33,7 @@ class FileFactory {
         return source;
     }
 
-    private static BitmapFactory.Options provideCompressionBitmapFactoryOptions(){
+    private static BitmapFactory.Options provideCompressionBitmapFactoryOptions() {
         BitmapFactory.Options opt = new BitmapFactory.Options();
         opt.inJustDecodeBounds = false;
         opt.inPreferredConfig = Bitmap.Config.RGB_565;
