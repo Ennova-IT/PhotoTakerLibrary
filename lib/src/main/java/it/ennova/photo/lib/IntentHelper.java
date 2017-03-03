@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 
 import java.io.File;
 
@@ -44,6 +45,7 @@ class IntentHelper {
                 pictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             }
         } catch (Exception e) {
+            Log.e("IntentHelper", e.getMessage());
             listener.onPhotoPathError();
         }
     }

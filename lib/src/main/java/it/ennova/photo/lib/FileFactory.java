@@ -19,6 +19,7 @@ class FileFactory {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
+        storageDir.mkdirs();
         return File.createTempFile(imageFileName, ".jpg", storageDir);
     }
 
