@@ -7,6 +7,4 @@ import android.support.annotation.Nullable;
 public interface OnPhotoRetrievedListener {
 
     void onPhotoRetrieved(@Nullable Bitmap picture);
-
-    void onPermissionRationaleRequested();
 }

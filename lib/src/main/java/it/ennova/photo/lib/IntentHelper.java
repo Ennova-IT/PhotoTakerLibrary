@@ -32,7 +32,7 @@ class IntentHelper {
 
         try {
 
-            File bitmapFile = FileFactory.createImageFileWith();
+            File bitmapFile = FileFactory.createImageFileWith(context);
             listener.onPhotoPathCreated(bitmapFile.getAbsolutePath());
 
             Uri photoURI = FileProvider.getUriForFile(context,

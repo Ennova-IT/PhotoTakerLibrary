@@ -1,6 +1,7 @@
 package it.ennova.photo.lib;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -13,12 +14,12 @@ import java.util.Date;
 
 class FileFactory {
 
-    static File createImageFileWith() throws IOException {
+    static File createImageFileWith(Context context) throws IOException {
         // Create an image file name
         @SuppressLint("SimpleDateFormat")
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
+        File storageDir = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "Camera");
         storageDir.mkdirs();
         return File.createTempFile(imageFileName, ".jpg", storageDir);
     }

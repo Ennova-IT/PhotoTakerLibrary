@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 public class PhotoLib {
     private static final int PHOTO_REQUEST_CODE = 100;
@@ -35,39 +36,20 @@ public class PhotoLib {
     }
 
     public void takePictureFromCamera() {
-
-        if (PermissionManager.hasPermission(targetActivity)) {
-            takePicture();
-        } else {
-            PermissionManager.requestPermission(targetActivity, this);
-        }
-    }
-
-    private void takePicture() {
         Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         pictureIntent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         if (pictureIntent.resolveActivity(targetActivity.getPackageManager()) != null) {
             IntentHelper.checkFullSizePhotoRequest(targetActivity, pictureIntent, this, applicationId);
             targetActivity.startActivityForResult(pictureIntent, PHOTO_REQUEST_CODE);
+        }else{
+            Toast.makeText(targetActivity, "No app found to take a picture", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    void onPermissionGranted() {
-        takePicture();
-    }
-
-    void onPermissionRationaleRequested() {
-        listener.onPermissionRationaleRequested();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PHOTO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             PictureDecodeUtils.parsePictureFrom(data, listener, path);
         }
-    }
-
-    public void onRequestPermissionResult(int requestCode, String permissions[], int[] grantResults) {
-        PermissionManager.onRequestPermissionResult(requestCode, grantResults, this);
     }
 
     public String getPhotoPath() {

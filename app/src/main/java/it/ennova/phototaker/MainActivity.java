@@ -42,15 +42,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onPhotoRetrieved(@Nullable Bitmap picture) {
         photoView.setImageBitmap(picture);
     }
-
-    @Override
-    public void onPermissionRationaleRequested() {
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        photoLib.onRequestPermissionResult(requestCode, permissions, grantResults);
-    }
 }
