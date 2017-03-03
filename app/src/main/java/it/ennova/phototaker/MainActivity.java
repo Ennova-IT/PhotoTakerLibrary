@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import it.ennova.photo.lib.OnPhotoRetrievedListener;
 import it.ennova.photo.lib.PhotoLib;
@@ -41,5 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onPhotoRetrieved(@Nullable Bitmap picture) {
         photoView.setImageBitmap(picture);
+    }
+
+    @Override
+    public void onError() {
+        Toast.makeText(this, "An error occurred. Please retry", Toast.LENGTH_SHORT).show();
     }
 }

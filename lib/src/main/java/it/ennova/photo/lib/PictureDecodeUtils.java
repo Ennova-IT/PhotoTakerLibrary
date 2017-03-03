@@ -12,7 +12,7 @@ class PictureDecodeUtils {
         if (TextUtils.isEmpty(path)) {
             extractThumbnailFrom(data, listener);
         } else {
-            decodePictureFrom(data, path, listener);
+            decodePictureFrom(path, listener);
         }
     }
 
@@ -20,13 +20,15 @@ class PictureDecodeUtils {
         Bundle extras = data.getExtras();
         if (extras != null && extras.containsKey("data")) {
             listener.onPhotoRetrieved((Bitmap) extras.get("data"));
+        } else {
+            listener.onError();
         }
     }
 
-    private static void decodePictureFrom(@NonNull Intent intent, @NonNull String path, @NonNull OnPhotoRetrievedListener listener) {
+    private static void decodePictureFrom(@NonNull String path, @NonNull OnPhotoRetrievedListener listener) {
         Bitmap bitmap = FileFactory.decodeCorrectlyOrientedImageFrom(path);
         if (bitmap == null) {
-            extractThumbnailFrom(intent, listener);
+            listener.onError();
         } else {
             listener.onPhotoRetrieved(bitmap);
         }

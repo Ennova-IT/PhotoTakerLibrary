@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 public class PhotoLib {
+
     private static final int PHOTO_REQUEST_CODE = 100;
     @NonNull
     private AppCompatActivity targetActivity;
