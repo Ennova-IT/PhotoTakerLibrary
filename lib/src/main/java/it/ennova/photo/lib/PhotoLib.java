@@ -45,6 +45,7 @@ public class PhotoLib {
 
     private void takePicture() {
         Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        pictureIntent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         if (pictureIntent.resolveActivity(targetActivity.getPackageManager()) != null) {
             IntentHelper.checkFullSizePhotoRequest(targetActivity, pictureIntent, this, applicationId);
             targetActivity.startActivityForResult(pictureIntent, PHOTO_REQUEST_CODE);
@@ -62,7 +63,6 @@ public class PhotoLib {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PHOTO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             PictureDecodeUtils.parsePictureFrom(data, listener, path);
-            targetActivity.finish();
         }
     }
 
